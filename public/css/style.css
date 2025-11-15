@@ -1,0 +1,22 @@
+/* Gradient Hero Background */
+.hero-bg {
+  background: linear-gradient(120deg, #0f172a 0%, #0ea5a4 100%);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px);
+}
+
+/* Fade animation */
+.fade-up {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all .6s ease;
+}
+
+.fade-up.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
