@@ -24,3 +24,19 @@ Route::prefix('admin')->group(function () {
     Route::resource('skills', SkillController::class);
     Route::get('messages', [ContactMessageController::class, 'index'])->name('admin.messages.index');
 });
+
+
+
+
+
+
+Route::get('register', [authController:: class, 'showRegister'])->name('register.form')
+Route::post('register',[authController::class, 'register'])->name ('register')
+Route::post('login',[authController::class, 'showlogin']) -> name ('login.form');
+
+Route::get('login', [authController:: class, 'showLogin'])->name('login.form')
+Route::post('login',[authController::class, 'login']) -> name ('login.form');
+
+Route::get('dashboard', function(){
+    return view('dashboard');
+})
