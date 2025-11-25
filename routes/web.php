@@ -3,40 +3,34 @@
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-// Main Resume Page at homepage
-Route::view('/', 'resume')->name('home');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-// Resume also accessible at /resume
-Route::view('/resume', 'resume')->name('resume');
-
-// Projects Routes
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-
-// Contact Route
-Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
-
-// Admin Routes
-Route::prefix('admin')->group(function () {
-    Route::resource('projects', ProjectController::class)->except(['index', 'show']);
-    Route::resource('skills', SkillController::class);
-    Route::get('messages', [ContactMessageController::class, 'index'])->name('admin.messages.index');
+// Main welcome page route
+Route::get('/', function () {
+    return view('welcome');
 });
 
+// Resume page route
+Route::get('/resume', function () {
+    return view('resume');
+})->name('resume');
 
+// Register routes
+Route::get('register', [AuthController::class, 'showRegister'])->name('register.form');
+Route::post('register', [AuthController::class, 'register'])->name('register');
 
+// Login routes
+Route::get('login', [AuthController::class, 'showLogin'])->name('login.form');
+Route::post('login', [AuthController::class, 'login'])->name('login');
 
-
-
-Route::get('register', [authController:: class, 'showRegister'])->name('register.form')
-Route::post('register',[authController::class, 'register'])->name ('register')
-Route::post('login',[authController::class, 'showlogin']) -> name ('login.form');
-
-Route::get('login', [authController:: class, 'showLogin'])->name('login.form')
-Route::post('login',[authController::class, 'login']) -> name ('login.form');
-
+// Dashboard route
 Route::get('dashboard', function(){
     return view('dashboard');
-})
+})->name('dashboard');
